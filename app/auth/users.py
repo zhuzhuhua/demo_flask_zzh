@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from app.models import *
 from app.auth import auth
 from app.models.users import User

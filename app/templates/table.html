@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/bk/css/bk.css" rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/components/table4_4/css/base.css" type="text/css"
+          rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/components/table4_4/css/common.css" type="text/css"
+          rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/components/table4_4/css/pages.css" type="text/css"
+          rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css"
+          rel="stylesheet">
+    <link href="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.metro.min.css"
+          rel="stylesheet">
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="https://magicbox.bkclouds.cc/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
+</head>
+<body>
+<div class="main_wrap w_940 clearfix" id="table4_demo4" style="width:800px;">
+
+
+    <!-- 带图标的按钮组 start -->
+
+    <form  action="/queryByTime" method="POST">
+        <a class="k-button" href="/query/0"><i class="k-icon k-i-search"></i> 当前考勤</a>
+        <a class="k-button" href="/query/1"><i class="k-icon k-i-search"></i> 昨日考勤</a>
+        <input type="text" name="time"/>
+        <input type="submit" value="查询日期">
+    </form>
+    <!--<div class="btn_group_wrap btn_group_inline">-->
+        <!--<a class="k-button" href="/query/0"><i class="k-icon k-i-search"></i> 查询当天</a>-->
+        <!--&lt;!&ndash;<a class="k-button"><i class="k-icon k-i-refresh"></i> 刷新</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a class="k-button"><i class="k-icon k-i-restore"></i> 重置条件</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a class="k-button"><i class="k-icon k-i-pencil"></i> 修改</a>&ndash;&gt;-->
+        <!--&lt;!&ndash;<a class="k-button"><i class="k-icon k-i-close"></i> 删除</a>&ndash;&gt;-->
+    <!--</div>-->
+
+    <!-- 带图标的按钮组 end -->
+
+    <!-- 表格 start -->
+    <div class="table_wrap1" style="margin-top:20px;">
+        <table id="grid">
+            <thead>
+            <tr>
+                <th data-field="user" width="25%">用户名</th>
+                <th data-field="time" width="30%">时间</th>
+                <th data-field="is_online" width="15%">状态</th>
+                <th data-field="cause" width="30%">原因</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in userlist %}
+            <tr>
+                {% for i in user %}
+                <td>
+                    {{i}}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+    </div>
+    <!-- 表格 end -->
+</div>
+<script type="text/javascript">
+    // 创建多选下拉菜单元素
+        var required = $("#required").kendoMultiSelect().data("kendoMultiSelect");
+        var optional = $("#optional").kendoMultiSelect().data("kendoMultiSelect");
+
+        $("#get").click(function() {
+            alert("Attendees:\n\nRequired: " + required.value() + "\nOptional: " + optional.value());
+        });
+        // 创建数据表
+        $("#grid").kendoGrid({
+            dataSource: {
+                pageSize: 10
+            },
+            sortable: true,
+            scrollable: false,
+            pageable: {
+                pageSizes: true,
+                buttonCount: 5
+            }
+        });
+        var grid3 = $('#table4_demo4').data('kendoGrid');
+        $('#table4_demo4').on('click','.add-user',function(){
+            grid3.addRow(); //插件编辑行
+            return false;
+        });
+
+</script>
+</body>
+</html>
