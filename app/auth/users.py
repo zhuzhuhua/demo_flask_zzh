@@ -16,8 +16,15 @@ def apidemo():
         #     "UserCode": i.UserCode,
         #     "Password": i.Password
         # } for i in result]}, {"count": len(result)})
-        return jsonify([i.to_json() for i in result])
+        # return jsonify([i.to_json() for i in result])
+        return  render_template('testajax.html')
     else:
         jsonResponse = dict(errCode="1", errMsg="操作成功！")
         response = jsonify(jsonResponse)
         return response
+
+
+@auth.route('/api2',methods=['GET'])
+def api_():
+    count = int(request.args.get('count'))
+    return jsonify({'msg':count+1})

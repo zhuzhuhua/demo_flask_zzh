@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/js/jquery.js"></script>
+</head>
+<body>
+    <input type="button" value="提交" id="result">
+</body>
+<script>
+    $("#result").click( function(){
+        console.log("begin");
+        $.ajax({
+            type: "GET",
+            url: "/auth/api2",
+            data: {'count':10},
+            datatype: "json", //"html","xml", "html", "script", "json", "jsonp", "text".
+            success:function(data){
+                var hello = data['msg'];
+                document.write("<div>"+hello+"</div>");
+                alert(data['msg']);
+                console.log(data);
+            },
+            error: function(){
+                console.log("error");
+            }
+
+        })
+    })
+</script>
+</html>
